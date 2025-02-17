@@ -1,0 +1,178 @@
+{
+    // dimension class
+    "teleport": {
+        "prefix": "/tp",
+        "body": ["$player.teleport($location);"],
+        "description": ""
+    },
+    
+      
+    "getEntities": {
+        "prefix": "/getEntities",
+        "body": [
+            "const entities = $dimension.getEntities({",
+            "    type: '$id',",
+            "    maxDistance: $distance,",
+            "    location: $location",
+            "});"
+        ],
+        "description": "Gets the entities"
+
+    },
+    "spawnEntity": {
+        "prefix": "/spawnEntity",
+        "body": [
+            "$dimension.spawnEntity('$id', $location)"
+        ],
+        "description": "spawns an entity in a dimension"
+    },
+    "spawnItem": {
+        "prefix": "/spawnItem",
+        "body": [
+            "$dimension.spawnItem($itemStack, $location)"
+        ],
+        "description": "spawns an item in a dimension"
+    },
+    //form 
+    "actionForm": {
+        "prefix": "/actionFormData",
+        "body": [
+            "const form = new ActionFormData()",
+            "    .title('$title')",
+            "    .body('$body')",
+            "    .button('$fn0_text')",
+            "    .button('$fn1_text')",
+            "    .show($player).then(({result, cancelled})=> {",
+            "        if (cancelled) return;",
+            "        [",
+            "            $fn0,",
+            "            $fn1",
+            "        ][result](player)",
+            "    })",
+            "",
+            "function $fn0(player) {}",
+            "function $fn1(player) {}"
+        ],
+        "description": "spawns an item in a dimension"
+    },
+    // ItemStack
+    "cnewItemStack": {
+        "prefix": "/cnewItemStack",
+        "body": [
+            "const $itemStack = new ItemStack('$id',$count)"
+        ],
+        "description": "defines a new itemStack"
+    },
+    "newItemStack": {
+        "prefix": "/newItemStack",
+        "body": [
+            "new ItemStack('$id',$count)"
+        ],
+        "description": "new itemStack (doesnt define it)"
+    },
+    // player class 
+    "getHealth":{
+        "prefix": "/getHealth",
+        "body": ["const health = $player.getComponent('health').currentValue;"],
+        "description": ""
+    },
+    "getComponent":{
+        "prefix": "/component",
+        "body": ["const equipment = $player.getComponent('$component');"],
+        "description": ""
+    },
+      
+    
+    // world class
+    "sendMessage":{
+        "prefix": "/sendMessage",
+        "body": ["$player.sendMessage('$message');"],
+        "description": ""
+    },
+      
+	"players": {
+        "prefix": "/players",
+        "body": [
+            "for (const player of world.getPlayers()) {",
+            "    $0",
+			"}"
+        ],
+        "description": ""
+    },
+    // system class
+    "crunInterval": {
+        "prefix": "/crunInterval",
+        "body": [
+            "const $runId = system.runInterval(() => {",
+            "    $0",
+            "}, $1);"
+        ],
+        "description": ""
+    },
+	"runInterval": {
+        "prefix": "/runInterval",
+        "body": [
+            "system.runInterval(() => {",
+            "    $0",
+            "}, $1);"
+        ],
+        "description": ""
+    },
+    "run": {
+        "prefix": "/run",
+        "body": [
+            "system.run(() => {",
+            "    $0",
+            "});"
+        ],
+        "description": ""
+    },
+    "runTimeout": {
+        "prefix": "/runTimeout",
+        "body": [
+            "system.runTimeout(() => {",
+            "    $0",
+            "}, $1);"
+        ],
+        "description": ""
+    },
+    // inventories
+    "inv": {
+        "prefix": "/inv",
+        "body": [
+            "const inventory = $player.getComponent('inventory').container;"
+        ],
+        "description": ""
+    },
+    "invForItem": {
+        "prefix": "/invForEachItem",
+        "body": [
+            "const inv = $player.getComponent('inventory').container;",
+            "for (let slot = 0; slot < inv.size; slot++) {",
+            "    const item = inv.getItem(slot);",
+            "    $0",
+            "}"
+
+        ],
+        "description": ""
+    },
+    "invItems": {
+        "prefix": "/invItems",
+        "body": [
+            "const inv = $player.getComponent('inventory').container",
+            "const items = Array.from({ length: inv.size }, (_, slot) => inv.getItem(slot)).filter(item => item != undefined);"
+        ],
+        "description": ""
+    },
+    // events
+    "event": {
+        "prefix": "/event",
+        "body": [
+            "$1.subscribe((event) => {",
+            "    const {$0} = event;",
+            "})"
+        ],
+        "description": ""
+    },
+
+}
