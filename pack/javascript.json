@@ -114,16 +114,7 @@
         "description": ""
     },
     // system class
-    "crunInterval": {
-        "prefix": "/crunInterval",
-        "body": [
-            "const $runId = system.runInterval(() => {",
-            "    $0",
-            "}, $1);"
-        ],
-        "description": ""
-    },
-	"runInterval": {
+    "runInterval": {
         "prefix": "/runInterval",
         "body": [
             "system.runInterval(() => {",
