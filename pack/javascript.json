@@ -53,6 +53,30 @@
             "}"
         ],
     },
+	"if": {
+        "prefix": "/if",
+        "body": [
+            "if ($condition) {",
+            "    $0",
+            "}"
+        ],
+    },
+	"else": {
+        "prefix": "/else",
+        "body": [
+            "else {",
+            "    $0",
+            "}"
+        ],
+    },
+	"elseif": {
+        "prefix": "/elif",
+        "body": [
+            "else if ($condition) {",
+            "    $0",
+            "}"
+        ],
+    },
     // dimension class
     "teleport": {
         "prefix": "/tp",
@@ -73,20 +97,6 @@
         "description": "Gets the entities"
 
     },
-	"getAllEntities":{
-		"prefix": "/getAllEntities",
-        "body": [
-			"const $allDimensions = [ 'overworld', 'nether', 'the_end' ];",
-			"const $dimensions = $allDimensions.map(dimension => world.getDimension(dimension));",
-			"const $entities = $dimensions.flatMap(dimension => dimension.getEntities());",
-			"",
-			"for(const entity of $entities) {",
-			"    $1",
-			"}",
-        ],
-        "description": "Gets all the entities in the world."
-
-	},
     "spawnEntity": {
         "prefix": "/spawnEntity",
         "body": [
@@ -149,17 +159,23 @@
         "body": ["const equipment = $player.getComponent('$component');"],
         "description": ""
     },
+	"movement":{
+        "prefix": "/pMoveVec",
+        "body": ["const {x, y} = $player.inputInfo.getMovementVector()"],
+        "description": ""
+    },
+
       
     
     // world class
     "sendMessage":{
         "prefix": "/sendMessage",
-        "body": ["$player.sendMessage('$message');"],
+        "body": ["$world.sendMessage(`$message`);"],
         "description": ""
     },
       
 	"players": {
-        "prefix": "/players",
+        "prefix": "/forplayer",
         "body": [
             "for (const player of world.getPlayers()) {",
             "    $0",
@@ -168,7 +184,16 @@
         "description": ""
     },
     // system class
-    "runInterval": {
+    "crunInterval": {
+        "prefix": "/crunInterval",
+        "body": [
+            "const $runId = system.runInterval(() => {",
+            "    $0",
+            "}, $1);"
+        ],
+        "description": ""
+    },
+	"runInterval": {
         "prefix": "/runInterval",
         "body": [
             "system.runInterval(() => {",
