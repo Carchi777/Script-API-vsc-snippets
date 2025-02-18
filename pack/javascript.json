@@ -1,4 +1,58 @@
 {
+    // basic js
+    "arrowfunction": {
+        "prefix": "/fnr",
+        "body": [
+            "($params) => {",
+            "    $0",
+            "}"
+        ],
+    },
+    "asyncfunction": {
+        "prefix": "/fna",
+        "body": [
+            "async function $name($params) {",
+            "    $0",
+            "}",
+            "$name($params);"
+        ],
+    },
+    "asyncArrowfunction": {
+        "prefix": "/fnar",
+        "body": [
+            "async($params) => {",
+            "    $0",
+            "}"
+        ],
+    },
+    "function": {
+        "prefix": "/fn",
+        "body": [
+            "function $name($params) {",
+            "    $0",
+            "}",
+            "$name($params);"
+        ],
+        "description": ""
+    },
+    "for": {
+        "prefix": "/for",
+        "body": [
+            "for (let $i = $min; $i < $max; $i++) {",
+            "    $0",
+            "}"
+        ],
+    },
+    "forin": {
+        "prefix": "/forin",
+        "body": [
+            "for (const $key in $obj) {",
+            "    const $value = $obj[$key];",
+            "    $0",
+            "    }",
+            "}"
+        ],
+    },
     // dimension class
     "teleport": {
         "prefix": "/tp",
